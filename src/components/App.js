@@ -10,6 +10,21 @@ const App = () => {
 
   const handleNumber = (e) => {
     const number = e.target.value;
+    async function fetchData(id) {
+      try {
+        setLoading(true);
+        const rawData = await fetch(
+          `https://jsonplaceholder.typicode.com/photos/${id}`
+        );
+        const data = await rawData.json();
+        setImgData(data);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    }
+    setId(number);
+    fetchData(number);
   };
   return (
     <div id="main">
